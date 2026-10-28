@@ -11,7 +11,7 @@
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
     del(k) { try { localStorage.removeItem(k); } catch (e) {} }
   };
-  const K = { session: "roy.session", hw: "roy.hwDone", wrong: "roy.wrong" };
+  const K = { session: "1st.session", hw: "1st.hwDone", wrong: "1st.wrong" };
 
   // ── 도우미 ──
   const $ = s => document.querySelector(s);
