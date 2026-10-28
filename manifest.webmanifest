@@ -1,7 +1,7 @@
 {
-  "name": "로이수학",
-  "short_name": "로이수학",
-  "description": "로이수학 학생용 앱 시험판",
+  "name": "일등급수학솔루션",
+  "short_name": "일등급수학",
+  "description": "일등급수학솔루션 학생용 앱 시험판",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

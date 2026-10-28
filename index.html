@@ -3,137 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>로이수학</title>
+<title>일등급수학솔루션</title>
 <meta name="theme-color" content="#ffffff">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="로이수학">
+<meta name="apple-mobile-web-app-title" content="일등급수학">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<style>
-:root{--ink:#111;--mid:#6b6b6b;--line:#e2e2e2;--tint:#f4f4f4;--accent:#2b4a6f;--accent-tint:#e7edf4}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{background:#fff;color:var(--ink);font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
- -webkit-tap-highlight-color:transparent;word-break:keep-all}
-body{padding:env(safe-area-inset-top) 0 calc(64px + env(safe-area-inset-bottom))}
-header{display:flex;align-items:center;gap:10px;padding:16px 20px 12px;border-bottom:1px solid var(--line)}
-header svg{width:28px;height:28px}
-header b{font-size:18px}
-header span{margin-left:auto;font-size:13px;color:var(--mid)}
-main{padding:20px}
-.tab{display:none}.tab.on{display:block}
-h2{font-size:15px;color:var(--mid);font-weight:600;margin:22px 0 10px}
-h2:first-child{margin-top:0}
-.card{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:10px}
-.card.hi{border-color:var(--accent);background:var(--accent-tint)}
-.card .t{font-weight:700;font-size:16px}
-.card .s{font-size:14px;color:var(--mid);margin-top:4px;line-height:1.5}
-.row{display:flex;align-items:center;gap:12px}
-.chk{width:24px;height:24px;border:2px solid var(--ink);border-radius:6px;flex:none;display:grid;place-items:center;font-size:15px;color:#fff}
-.done .chk{background:var(--ink)}
-.done .t{color:var(--mid);text-decoration:line-through}
-.bar{height:8px;background:var(--tint);border-radius:4px;margin-top:10px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--accent)}
-.wrong .no{font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
-.tag{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:4px;padding:1px 6px;color:var(--mid);margin-left:6px}
-.btn{display:block;width:100%;padding:14px;border:0;border-radius:10px;background:var(--ink);color:#fff;font-size:15px;font-weight:600;margin-top:6px}
-form{display:grid;gap:8px;margin-bottom:12px}
-input,select{font:inherit;font-size:16px;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
-nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:#fff;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
-nav button{flex:1;border:0;background:none;padding:10px 0 12px;font:inherit;font-size:12px;color:var(--mid);display:grid;justify-items:center;gap:3px}
-nav button.on{color:var(--ink);font-weight:700}
-nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2}
-.note{font-size:12px;color:var(--mid);text-align:center;margin-top:24px;line-height:1.6}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
-<header>
- <svg viewBox="0 0 120 120"><g transform="translate(10,10)"><path fill="none" stroke="#111" stroke-width="10" d="M20,96 V8 H44 A24,24 0 0 1 44,56 H22 M42,56 L82,96"/><circle cx="44" cy="32" r="8" fill="#2B4A6F"/></g></svg>
- <b>로이수학</b><span id="who">김로이 · 고1 A반</span>
-</header>
-
-<main>
- <section class="tab on" id="t-home">
-  <h2>다음 수업</h2>
-  <div class="card hi"><div class="t">토요일 10:00 · 공통수학1</div><div class="s">Ⅰ. 다항식 — 03 나머지정리</div></div>
-  <h2>이번 주 숙제</h2>
-  <div id="hw"></div>
-  <div class="card"><div class="t">이번 주 진도</div><div class="s" id="hwp"></div><div class="bar"><i id="hwbar"></i></div></div>
- </section>
-
- <section class="tab" id="t-wrong">
-  <h2>오답 추가</h2>
-  <form id="wf">
-   <select id="wsec"><option>01 다항식의 연산</option><option>02 항등식</option><option>03 나머지정리</option><option>04 인수분해</option></select>
-   <input id="wno" inputmode="numeric" placeholder="교재 문항 번호 (예: 024)" required>
-   <select id="wwhy"><option>개념</option><option>계산 실수</option><option>문제 잘못 읽음</option><option>풀이 방향</option></select>
-   <button class="btn">추가</button>
-  </form>
-  <h2>내 오답 <span class="tag" id="wcnt"></span></h2>
-  <div id="wl"></div>
- </section>
-
- <section class="tab" id="t-notice">
-  <h2>공지</h2>
-  <div class="card"><div class="t">12월 개원 안내</div><div class="s">테스트용 공지입니다. 실제 공지는 개원 후 이곳에 올라옵니다.</div></div>
-  <div class="card"><div class="t">진단평가 결과 상담</div><div class="s">테스트용 공지입니다.</div></div>
-  <p class="note">로이수학 앱 시험판 · 가상 학생 데이터<br>입력한 오답은 이 휴대폰에만 저장됩니다.</p>
- </section>
-</main>
-
-<nav>
- <button class="on" data-t="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9H3z"/></svg>홈</button>
- <button data-t="wrong"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5zM9 9h6M9 13h6"/></svg>오답노트</button>
- <button data-t="notice"><svg viewBox="0 0 24 24"><path d="M4 10v4h4l6 4V6l-6 4z"/></svg>공지</button>
+<body class="nonav">
+<header id="hd"></header>
+<main id="page"></main>
+<nav id="nav">
+ <a href="#home" data-n="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9H3z"/></svg>홈</a>
+ <a href="#class" data-n="class"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>수업</a>
+ <a href="#hw" data-n="hw"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12l3 3 5-6"/></svg>숙제</a>
+ <a href="#wrong" data-n="wrong"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5zM9 9h6M9 13h6"/></svg>오답노트</a>
+ <a href="#more" data-n="more"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg>전체</a>
 </nav>
-
-<script>
-const store = {
-  get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d } catch { return d } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)) } catch {} }
-};
-
-document.querySelectorAll("nav button").forEach(b => b.onclick = () => {
-  document.querySelectorAll("nav button").forEach(x => x.classList.toggle("on", x === b));
-  document.querySelectorAll(".tab").forEach(s => s.classList.toggle("on", s.id === "t-" + b.dataset.t));
-});
-
-const HW = ["개념서 03 나머지정리 예제 1~4", "문제풀이 041~052", "오답 다시 풀기 3문항"];
-function drawHW() {
-  const done = store.get("hw", []);
-  document.getElementById("hw").innerHTML = HW.map((h, i) =>
-    `<div class="card row ${done.includes(i) ? "done" : ""}" data-i="${i}"><span class="chk">✓</span><span class="t">${h}</span></div>`).join("");
-  document.querySelectorAll("#hw .card").forEach(c => c.onclick = () => {
-    const i = +c.dataset.i, d = store.get("hw", []);
-    store.set("hw", d.includes(i) ? d.filter(x => x !== i) : [...d, i]);
-    drawHW();
-  });
-  const pct = Math.round(done.length / HW.length * 100);
-  document.getElementById("hwp").textContent = `숙제 ${done.length}/${HW.length} 완료`;
-  document.getElementById("hwbar").style.width = pct + "%";
-}
-
-function drawWrong() {
-  const w = store.get("wrong", [{ sec: "02 항등식", no: "031", why: "개념" }]);
-  document.getElementById("wcnt").textContent = w.length + "개";
-  document.getElementById("wl").innerHTML = w.map((x, i) =>
-    `<div class="card wrong row"><span class="no">${x.no}</span><span style="flex:1">${x.sec}<span class="tag">${x.why}</span></span>
-     <button data-i="${i}" style="border:0;background:none;color:#6b6b6b;font-size:13px">해결</button></div>`).join("");
-  document.querySelectorAll("#wl button").forEach(b => b.onclick = () => {
-    const d = store.get("wrong", w); d.splice(+b.dataset.i, 1); store.set("wrong", d); drawWrong();
-  });
-}
-document.getElementById("wf").onsubmit = e => {
-  e.preventDefault();
-  const d = store.get("wrong", [{ sec: "02 항등식", no: "031", why: "개념" }]);
-  d.unshift({ sec: wsec.value, no: wno.value.padStart(3, "0"), why: wwhy.value });
-  store.set("wrong", d); wno.value = ""; drawWrong();
-};
-
-drawHW(); drawWrong();
-if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");
-</script>
+<script src="data.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
